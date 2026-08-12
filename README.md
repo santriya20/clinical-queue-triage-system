@@ -81,14 +81,15 @@ The ETA is recalculated whenever the queue state changes.
 ### 🔔 5. Call Next Patient Workflow
 
 ```text
-[ WAITING ] ──► [ CALL NEXT PATIENT ] ──► [ IN CONSULTATION ] ──► [ COMPLETED ]```
+[ WAITING ] ──► [ CALL NEXT PATIENT ] ──► [ IN CONSULTATION ] ──► [ COMPLETED ]
+```
 
 The system automatically selects and transitions the highest-priority eligible patient.
 
-💾 6. Persistent SQLite Storage
+## 💾 6. Persistent SQLite Storage
 Patient records, triage information, queue status, and operational timestamps are stored in clinic.db. SQLite provides persistent local storage so data is retained across application restarts.
 
-📊 7. Real-Time Analytics
+## 📊 7. Real-Time Analytics
 The Streamlit dashboard tracks:
 
 Active queue size
@@ -105,7 +106,10 @@ Patient queue positions
 
 Clinical throughput
 
-🏗️ System Architecture
+---
+
+## 🏗️ System Architecture
+```text
 
 ┌───────────────────────────────┐
 │       Streamlit Frontend      │
@@ -127,8 +131,11 @@ Clinical throughput
 │ Forest   │ │ Queue  │ │ Database │
 │ Predictor│ │ Engine │ │          │
 └──────────┘ └────────┘ └──────────┘
+```
 
-🧰 Technology Stack
+---
+
+## 🧰 Technology Stack
 
 | Component | Technology |
 | :--- | :--- |
@@ -140,6 +147,8 @@ Clinical throughput
 | **Data Validation** | Pydantic |
 | **Model Serialization** | Joblib |
 | **Storage & Persistence** | SQLite3 |
+
+---
 
 ### 📂 Project Structure
 
@@ -153,53 +162,65 @@ clinical_queue_system/
 ├── duration_predictor.joblib # Serialized ML model
 ├── clinic.db                 # SQLite database (auto-generated)
 ├── requirements.txt          # Python dependencies
-└── README.md                 # Project documentation```
+└── README.md                 # Project documentation
+```
 
-🚀 Installation & Quick Start
-1. Create & Activate Virtual Environment
+---
 
-# Windows (PowerShell)
+## 🚀 Installation & Quick Start
+
+**1. Create & Activate Virtual Environment**
+
+* Windows (PowerShell)
+```powershell
 python -m venv venv
-.\venv\Scripts\Activate.ps1
+.\venv\Scripts\Activate.
+```
 
-# macOS / Linux
+* macOS / Linux
+```powershell
 # python3 -m venv venv
 # source venv/bin/activate
+```
 
-2. Install Dependencies
-
+**2. Install Dependencies**
+```powershell
 pip install -r requirements.txt
-
-3. Train the ML Model
-
+```
+**3. Train the ML Model**
+```powershell
 python train_model.py
-
-4. Start the Backend (Terminal 1)
-
+```
+**4. Start the Backend (Terminal 1)**
+```powershell
 uvicorn main:app --reload
+```
+**Backend API:** http://127.0.0.1:8000
 
-Backend API: http://127.0.0.1:8000
+**Swagger API Docs:** http://127.0.0.1:8000/docs
 
-Swagger API Docs: http://127.0.0.1:8000/docs
-
-5. Start the Frontend (Terminal 2)
-
+**5. Start the Frontend (Terminal 2)**
+```powershell
 streamlit run app.py
+```
+**Dashboard:** http://localhost:8501
 
-Dashboard: http://localhost:8501
+# 🧪 Demo & Testing
 
-🧪 Demo & Testing
-
-1.Seed Synthetic Patients:
+**1.Seed Synthetic Patients:**
+```powersnell
 python seed_data.py
+```
 
-2.View Dynamic Queue: Open http://localhost:8501 and go to 📊 Live Priority Queue to inspect aging boosts, predicted consult durations, and rolling ETAs.
+**2.View Dynamic Queue:** Open http://localhost:8501 and go to 📊 Live Priority Queue to inspect aging boosts, predicted consult durations, and rolling ETAs.
 
-3.Call Next Patient: Click 🔔 Call Next Patient to serve the highest-priority patient.
+**3.Call Next Patient:** Click 🔔 Call Next Patient to serve the highest-priority patient.
 
-4.Inspect Analytics: Open 📈 Clinic Analytics to view completed visits, average durations, and urgency distributions.
+**4.Inspect Analytics:** Open 📈 Clinic Analytics to view completed visits, average durations, and urgency distributions.
 
-5.Reset Data: Go to ⚙️ System Controls and select 🗑️ Reset All Queue Data.
+**5.Reset Data:** Go to ⚙️ System Controls and select 🗑️ Reset All Queue Data.
+
+---
 
 ### 📡 API Endpoints Reference
 
@@ -211,6 +232,7 @@ python seed_data.py
 | `POST` | `/api/queue/call-next` | Transitions the next highest-priority patient to completed |
 | `GET` | `/api/stats` | Returns aggregate clinical metrics |
 | `DELETE` | `/api/queue/reset` | Clears all queue records from the database |
+---
 
 ### 🚨 Triage Urgency Levels
 
@@ -223,7 +245,10 @@ python seed_data.py
 
 > **Note:** These tiers are designed for demonstration and educational simulation and do not replace professional medical triage protocols.
 
-🧠 Queue Processing Workflow
+---
+
+## 🧠 Queue Processing Workflow
+```text
 Patient Arrives
        │
        ▼
@@ -273,8 +298,11 @@ Predicted Duration (Minutes)
        │
        ▼
 Rolling Prefix-Sum Wait Times (ETAs)
+```
+---
 
-📈 Benefits
+## 📈 Benefits
+
 🚑 Faster prioritization of emergency cases
 
 ⏱️ More realistic waiting-time estimates
@@ -298,11 +326,17 @@ Rolling Prefix-Sum Wait Times (ETAs)
 
 🔄 Automated doctor workload balancing
 
-🔐 Data Privacy
+---
+
+## 🔐 Data Privacy
 This repository uses a local SQLite database intended for synthetic patient data. A production healthcare deployment requires authentication, authorization, end-to-end encryption, audit logging, and compliance with healthcare data regulations (e.g., HIPAA / DISHA).
 
-⚠️ Disclaimer
+---
+
+## ⚠️ Disclaimer
 This project is an academic and software engineering prototype demonstrating machine learning, dynamic scheduling, queue optimization, and healthcare workflow simulation. It is not a certified medical device and should not be used to make clinical decisions without validated protocols, clinical testing, and regulatory approval.
 
-📜 License
+---
+
+## 📜 License
 This project is licensed under the MIT License.
