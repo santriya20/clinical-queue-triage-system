@@ -1,5 +1,7 @@
 # 🏥 AI-Powered Dynamic Clinical Queue & Triage Management System
 
+**🚀 Live Interactive Demo:** [https://clinical-queue-triage.streamlit.app/](https://clinical-queue-triage.streamlit.app/)
+
 An intelligent clinical queue management system that combines Machine Learning, dynamic priority scheduling, starvation prevention, and real-time ETA calculation to improve hospital and OPD queue management.
 
 Traditional hospital queues often use First-In-First-Out (FIFO) scheduling. This can cause emergency patients to wait behind routine patients. This project introduces a dynamic triage-aware queue that prioritizes patients according to urgency while preventing lower-priority patients from waiting indefinitely.
